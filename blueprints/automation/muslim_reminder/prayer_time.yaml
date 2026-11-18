@@ -1,0 +1,44 @@
+blueprint:
+  name: Muslim Reminder · At prayer time
+  description: >-
+    Do something when a prayer time comes: pause the TV, dim the lights,
+    turn on the lamp of the prayer room… The adhan itself is played by the
+    integration (select "Adhan" of each prayer); this blueprint is for the
+    rest of the house.
+  domain: automation
+  source_url: https://github.com/muslimreminder/home-assistant/blob/main/blueprints/automation/muslim_reminder/prayer_time.yaml
+  input:
+    prayers:
+      name: Prayers
+      default: [fajr, dhuhr, asr, maghrib, isha]
+      selector:
+        select:
+          multiple: true
+          options:
+            - { label: Fajr, value: fajr }
+            - { label: Sunrise (shuruq), value: sunrise }
+            - { label: Dhuhr, value: dhuhr }
+            - { label: Asr, value: asr }
+            - { label: Maghrib, value: maghrib }
+            - { label: Isha, value: isha }
+    actions:
+      name: Actions
+      description: What to do. The prayer is in `{{ prayer }}`.
+      selector:
+        action: {}
+
+mode: queued
+
+triggers:
+  - trigger: event
+    event_type: muslim_reminder_prayer
+
+variables:
+  prayers: !input prayers
+  prayer: "{{ trigger.event.data.prayer }}"
+
+conditions:
+  - condition: template
+    value_template: "{{ prayer in prayers }}"
+
+actions: !input actions
