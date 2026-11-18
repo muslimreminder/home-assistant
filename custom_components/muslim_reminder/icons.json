@@ -1,0 +1,53 @@
+{
+  "entity": {
+    "sensor": {
+      "fajr": { "default": "mdi:weather-night-partly-cloudy" },
+      "sunrise": { "default": "mdi:weather-sunset-up" },
+      "dhuhr": { "default": "mdi:weather-sunny" },
+      "asr": { "default": "mdi:weather-partly-cloudy" },
+      "maghrib": { "default": "mdi:weather-sunset-down" },
+      "isha": { "default": "mdi:weather-night" },
+      "next_prayer": { "default": "mdi:mosque" },
+      "next_prayer_name": { "default": "mdi:mosque" },
+      "next_salawat": { "default": "mdi:bell-ring-outline" },
+      "method": { "default": "mdi:calculator-variant-outline" }
+    },
+    "switch": {
+      "salawat_reminders": { "default": "mdi:bell-ring", "state": { "off": "mdi:bell-off" } },
+      "quiet_hours": { "default": "mdi:sleep", "state": { "off": "mdi:sleep-off" } },
+      "adhan": { "default": "mdi:bullhorn", "state": { "off": "mdi:volume-off" } }
+    },
+    "number": {
+      "salawat_interval": { "default": "mdi:timer-sync-outline" },
+      "salawat_volume": { "default": "mdi:volume-high" },
+      "adhan_volume": { "default": "mdi:volume-high" }
+    },
+    "time": {
+      "quiet_from": { "default": "mdi:sleep" },
+      "quiet_to": { "default": "mdi:alarm" }
+    },
+    "select": {
+      "salawat_sound": { "default": "mdi:music-note" },
+      "adhan_sound": { "default": "mdi:account-voice" },
+      "fajr_adhan": { "default": "mdi:bullhorn-outline" },
+      "dhuhr_adhan": { "default": "mdi:bullhorn-outline" },
+      "asr_adhan": { "default": "mdi:bullhorn-outline" },
+      "maghrib_adhan": { "default": "mdi:bullhorn-outline" },
+      "isha_adhan": { "default": "mdi:bullhorn-outline" }
+    },
+    "button": {
+      "play_salawat": { "default": "mdi:play-circle-outline" },
+      "play_adhan": { "default": "mdi:play-circle" },
+      "stop": { "default": "mdi:stop-circle-outline" }
+    },
+    "event": {
+      "prayer": { "default": "mdi:mosque" },
+      "salawat": { "default": "mdi:bell-ring-outline" }
+    }
+  },
+  "services": {
+    "play_salawat": { "service": "mdi:bell-ring" },
+    "play_adhan": { "service": "mdi:bullhorn" },
+    "get_prayer_times": { "service": "mdi:clock-time-four-outline" }
+  }
+}

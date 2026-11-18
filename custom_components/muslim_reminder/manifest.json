@@ -1,0 +1,13 @@
+{
+  "domain": "muslim_reminder",
+  "name": "Muslim Reminder",
+  "codeowners": ["@muslimreminder"],
+  "config_flow": true,
+  "dependencies": ["media_player", "media_source"],
+  "documentation": "https://github.com/muslimreminder/home-assistant",
+  "integration_type": "service",
+  "iot_class": "calculated",
+  "issue_tracker": "https://github.com/muslimreminder/home-assistant/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}
