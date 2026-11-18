@@ -1,0 +1,75 @@
+play_salawat:
+  fields:
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: muslim_reminder
+    entity_id:
+      selector:
+        entity:
+          domain: media_player
+          multiple: true
+    sound:
+      selector:
+        select:
+          translation_key: salawat_sound
+          options:
+            - reminder_1
+            - reminder_2
+            - reminder_3
+            - reminder_4
+            - reminder_5
+            - reminder_6
+            - reminder_7
+    volume:
+      selector:
+        number:
+          min: 0
+          max: 100
+          step: 5
+          unit_of_measurement: "%"
+play_adhan:
+  fields:
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: muslim_reminder
+    entity_id:
+      selector:
+        entity:
+          domain: media_player
+          multiple: true
+    sound:
+      selector:
+        select:
+          translation_key: adhan_sound
+          options:
+            - adhan_1
+            - adhan_2
+            - adhan_5
+            - adhan_6
+            - adhan_7
+            - adhan_8
+            - adhan_9
+            - adhan_10
+            - adhan_11
+    full:
+      default: true
+      selector:
+        boolean:
+    volume:
+      selector:
+        number:
+          min: 0
+          max: 100
+          step: 5
+          unit_of_measurement: "%"
+get_prayer_times:
+  fields:
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: muslim_reminder
+    date:
+      selector:
+        date:

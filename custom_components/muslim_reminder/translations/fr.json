@@ -1,0 +1,470 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Ajouter un lieu",
+        "description": "Les horaires de prière sont calculés pour cet endroit, comme dans l'app Muslim Reminder.",
+        "data": {
+          "name": "Nom",
+          "location": "Emplacement",
+          "method": "Méthode de calcul",
+          "madhab": "Madhab (heure de Asr)"
+        },
+        "data_description": {
+          "method": "Automatique choisit la méthode du pays réglé dans Home Assistant, comme le fait l'app."
+        }
+      },
+      "reconfigure": {
+        "title": "Déplacer le lieu",
+        "data": {
+          "name": "Nom",
+          "location": "Emplacement"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "Ce lieu est déjà configuré.",
+      "reconfigure_successful": "Le lieu a été mis à jour."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options de Muslim Reminder",
+        "sections": {
+          "speakers": {
+            "name": "Enceintes",
+            "description": "Où les rappels et les adhans sont joués.",
+            "data": {
+              "salawat_players": "Enceintes des rappels de salawat",
+              "adhan_players": "Enceintes de l'adhan",
+              "announce": "Jouer en annonce"
+            },
+            "data_description": {
+              "announce": "Sur les enceintes qui le permettent (Sonos, Music Assistant, ESPHome…), la musique s'interrompt pour le rappel puis reprend."
+            }
+          },
+          "conditions": {
+            "name": "Conditions",
+            "description": "Laissez la maison décider. Une entité est active quand elle est allumée, à la maison, ouverte, en lecture, ou un nombre supérieur à 0 (zone.home compte les personnes présentes).",
+            "data": {
+              "salawat_required": "Rappels de salawat seulement si toutes ces entités sont actives",
+              "salawat_blocking": "Pas de rappel de salawat tant qu'une de ces entités est active",
+              "adhan_required": "Adhan seulement si toutes ces entités sont actives",
+              "adhan_blocking": "Pas d'adhan tant qu'une de ces entités est active"
+            }
+          },
+          "calculation": {
+            "name": "Calcul",
+            "description": "Les mêmes réglages que dans l'app. Les corrections sont en minutes ; les angles personnalisés remplacent ceux de la méthode.",
+            "data": {
+              "method": "Méthode de calcul",
+              "madhab": "Madhab (heure de Asr)",
+              "adjust_fajr": "Correction Fajr",
+              "adjust_sunrise": "Correction Lever du soleil",
+              "adjust_dhuhr": "Correction Dhuhr",
+              "adjust_asr": "Correction Asr",
+              "adjust_maghrib": "Correction Maghrib",
+              "adjust_isha": "Correction Isha",
+              "fajr_angle": "Angle de Fajr",
+              "isha_angle": "Angle d'Isha",
+              "maghrib_angle": "Angle de Maghrib"
+            },
+            "data_description": {
+              "method": "Automatique choisit la méthode du pays réglé dans Home Assistant, comme le fait l'app."
+            }
+          },
+          "sounds": {
+            "name": "Sons",
+            "description": "Facultatif : votre propre son au lieu de ceux de l'app (une URL ou un identifiant media-source:// du navigateur multimédia).",
+            "data": {
+              "salawat_media": "Son des salawat (URL ou media-source)",
+              "adhan_media": "Son de l'adhan (URL ou media-source)",
+              "sound_base_url": "Adresse des sons de l'app"
+            }
+          }
+        }
+      }
+    }
+  },
+  "selector": {
+    "method": {
+      "options": {
+        "auto": "Automatique (selon le pays de Home Assistant)",
+        "muslim_world_league": "Ligue islamique mondiale",
+        "moonsighting_commitee": "Méthode développée par Khalid Shaukat, fondateur du Moonsighting Committee Worldwide",
+        "north_america": "Société islamique d'Amérique du Nord (ISNA)",
+        "egypt": "Autorité générale du sondage égyptien",
+        "umm_alqura": "Université Umm al-Qura, Makkah",
+        "karachi": "Université des sciences islamiques, Karachi",
+        "tehran": "Shia, Institut de géophysique, Université de Téhéran, Iran",
+        "kuwait": "Kuwait",
+        "singapore": "Singapour",
+        "qatar": "Qatar",
+        "turqey": "Approximation de la Diyanet İşleri Başkanlığı, Turquie",
+        "dubai": "La région du Golfe (Dubaï)",
+        "gulf": "Région du Golfe 1",
+        "morocco": "Ministère Marocain des wakfs et des affaires islamiques",
+        "gulf_2": "Région du Golfe 2",
+        "france_uoif": "Musulmans de France (anciennement UOIF)",
+        "france_15": "Angle de France 15",
+        "france_18": "Angle de France 18",
+        "russia": "Administration spirituelle des musulmans de Russie",
+        "jafari": "Shia Ithna Ashari, Institut Leva, Qum, Iran",
+        "kemenag": "Kementrian Agama Republik Indonesia (KEMENAG)",
+        "algeria": "Ministère des affaires religieuses et des wakfs, Algérie",
+        "brunei": "Kementrian Hal Ehwal Ugama (Brunei Darussalam)",
+        "tunisia": "Ministère des affaires religieuses de Tunisie",
+        "custom": "Personnalisé"
+      }
+    },
+    "madhab": {
+      "options": {
+        "shafi": "Chaféite, malékite, hanbalite (Asr standard)",
+        "hanafi": "Hanafite (Asr plus tardif)"
+      }
+    },
+    "salawat_sound": {
+      "options": {
+        "reminder_1": "Choix 1",
+        "reminder_2": "Choix 2",
+        "reminder_3": "Choix 3",
+        "reminder_4": "Choix 4",
+        "reminder_5": "Choix 5",
+        "reminder_6": "Choix 6",
+        "reminder_7": "Choix 7"
+      }
+    },
+    "adhan_sound": {
+      "options": {
+        "adhan_1": "Ahmad Al-Nufais",
+        "adhan_2": "Hafız Mustafa Özcan (Turquie)",
+        "adhan_5": "Adhan traditionnel 1",
+        "adhan_6": "Adhan traditionnel 2",
+        "adhan_7": "Mishary Alafasy · Version 2",
+        "adhan_8": "Adhan traditionnel 3",
+        "adhan_9": "Mishary Alafasy · Version 3",
+        "adhan_10": "Mansour Al-Zahrani",
+        "adhan_11": "Adhan traditionnel 4"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "fajr": {
+        "name": "Fajr",
+        "state_attributes": {
+          "tomorrow": {
+            "name": "Demain"
+          }
+        }
+      },
+      "sunrise": {
+        "name": "Lever du soleil",
+        "state_attributes": {
+          "tomorrow": {
+            "name": "Demain"
+          }
+        }
+      },
+      "dhuhr": {
+        "name": "Dhuhr",
+        "state_attributes": {
+          "tomorrow": {
+            "name": "Demain"
+          }
+        }
+      },
+      "asr": {
+        "name": "Asr",
+        "state_attributes": {
+          "tomorrow": {
+            "name": "Demain"
+          }
+        }
+      },
+      "maghrib": {
+        "name": "Maghrib",
+        "state_attributes": {
+          "tomorrow": {
+            "name": "Demain"
+          }
+        }
+      },
+      "isha": {
+        "name": "Isha",
+        "state_attributes": {
+          "tomorrow": {
+            "name": "Demain"
+          }
+        }
+      },
+      "next_prayer": {
+        "name": "Prochaine prière",
+        "state_attributes": {
+          "prayer": {
+            "name": "Prière",
+            "state": {
+              "fajr": "Fajr",
+              "dhuhr": "Dhuhr",
+              "asr": "Asr",
+              "maghrib": "Maghrib",
+              "isha": "Isha"
+            }
+          }
+        }
+      },
+      "next_prayer_name": {
+        "name": "Nom de la prochaine prière",
+        "state": {
+          "fajr": "Fajr",
+          "dhuhr": "Dhuhr",
+          "asr": "Asr",
+          "maghrib": "Maghrib",
+          "isha": "Isha"
+        }
+      },
+      "next_salawat": {
+        "name": "Prochain rappel de salawat"
+      },
+      "method": {
+        "name": "Méthode de calcul",
+        "state": {
+          "muslim_world_league": "Ligue islamique mondiale",
+          "moonsighting_commitee": "Méthode développée par Khalid Shaukat, fondateur du Moonsighting Committee Worldwide",
+          "north_america": "Société islamique d'Amérique du Nord (ISNA)",
+          "egypt": "Autorité générale du sondage égyptien",
+          "umm_alqura": "Université Umm al-Qura, Makkah",
+          "karachi": "Université des sciences islamiques, Karachi",
+          "tehran": "Shia, Institut de géophysique, Université de Téhéran, Iran",
+          "kuwait": "Kuwait",
+          "singapore": "Singapour",
+          "qatar": "Qatar",
+          "turqey": "Approximation de la Diyanet İşleri Başkanlığı, Turquie",
+          "dubai": "La région du Golfe (Dubaï)",
+          "gulf": "Région du Golfe 1",
+          "morocco": "Ministère Marocain des wakfs et des affaires islamiques",
+          "gulf_2": "Région du Golfe 2",
+          "france_uoif": "Musulmans de France (anciennement UOIF)",
+          "france_15": "Angle de France 15",
+          "france_18": "Angle de France 18",
+          "russia": "Administration spirituelle des musulmans de Russie",
+          "jafari": "Shia Ithna Ashari, Institut Leva, Qum, Iran",
+          "kemenag": "Kementrian Agama Republik Indonesia (KEMENAG)",
+          "algeria": "Ministère des affaires religieuses et des wakfs, Algérie",
+          "brunei": "Kementrian Hal Ehwal Ugama (Brunei Darussalam)",
+          "tunisia": "Ministère des affaires religieuses de Tunisie",
+          "custom": "Personnalisé"
+        }
+      }
+    },
+    "switch": {
+      "salawat_reminders": {
+        "name": "Rappels de salawat"
+      },
+      "quiet_hours": {
+        "name": "Heures de silence"
+      },
+      "adhan": {
+        "name": "Adhan"
+      }
+    },
+    "number": {
+      "salawat_interval": {
+        "name": "Intervalle des salawat"
+      },
+      "salawat_volume": {
+        "name": "Volume des salawat"
+      },
+      "adhan_volume": {
+        "name": "Volume de l'adhan"
+      }
+    },
+    "time": {
+      "quiet_from": {
+        "name": "Début du silence"
+      },
+      "quiet_to": {
+        "name": "Fin du silence"
+      }
+    },
+    "select": {
+      "salawat_sound": {
+        "name": "Son des salawat",
+        "state": {
+          "reminder_1": "Choix 1",
+          "reminder_2": "Choix 2",
+          "reminder_3": "Choix 3",
+          "reminder_4": "Choix 4",
+          "reminder_5": "Choix 5",
+          "reminder_6": "Choix 6",
+          "reminder_7": "Choix 7"
+        }
+      },
+      "adhan_sound": {
+        "name": "Muezzin",
+        "state": {
+          "adhan_1": "Ahmad Al-Nufais",
+          "adhan_2": "Hafız Mustafa Özcan (Turquie)",
+          "adhan_5": "Adhan traditionnel 1",
+          "adhan_6": "Adhan traditionnel 2",
+          "adhan_7": "Mishary Alafasy · Version 2",
+          "adhan_8": "Adhan traditionnel 3",
+          "adhan_9": "Mishary Alafasy · Version 3",
+          "adhan_10": "Mansour Al-Zahrani",
+          "adhan_11": "Adhan traditionnel 4"
+        }
+      },
+      "fajr_adhan": {
+        "name": "Adhan de Fajr",
+        "state": {
+          "mute": "Silencieux",
+          "short": "Adhan court (30 s)",
+          "full": "Adhan complet"
+        }
+      },
+      "dhuhr_adhan": {
+        "name": "Adhan de Dhuhr",
+        "state": {
+          "mute": "Silencieux",
+          "short": "Adhan court (30 s)",
+          "full": "Adhan complet"
+        }
+      },
+      "asr_adhan": {
+        "name": "Adhan de Asr",
+        "state": {
+          "mute": "Silencieux",
+          "short": "Adhan court (30 s)",
+          "full": "Adhan complet"
+        }
+      },
+      "maghrib_adhan": {
+        "name": "Adhan de Maghrib",
+        "state": {
+          "mute": "Silencieux",
+          "short": "Adhan court (30 s)",
+          "full": "Adhan complet"
+        }
+      },
+      "isha_adhan": {
+        "name": "Adhan de Isha",
+        "state": {
+          "mute": "Silencieux",
+          "short": "Adhan court (30 s)",
+          "full": "Adhan complet"
+        }
+      }
+    },
+    "button": {
+      "play_salawat": {
+        "name": "Jouer un rappel de salawat"
+      },
+      "play_adhan": {
+        "name": "Jouer l'adhan"
+      },
+      "stop": {
+        "name": "Arrêter les enceintes"
+      }
+    },
+    "event": {
+      "prayer": {
+        "name": "Heure de prière",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "fajr": "Fajr",
+              "sunrise": "Lever du soleil",
+              "dhuhr": "Dhuhr",
+              "asr": "Asr",
+              "maghrib": "Maghrib",
+              "isha": "Isha"
+            }
+          }
+        }
+      },
+      "salawat": {
+        "name": "Rappel de salawat",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "reminder": "Rappel"
+            }
+          }
+        }
+      }
+    }
+  },
+  "services": {
+    "play_salawat": {
+      "name": "Jouer un rappel de salawat",
+      "description": "Joue tout de suite un rappel de salawat (prière sur le Prophète ﷺ), quels que soient les interrupteurs et les conditions.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Lieu",
+          "description": "Le lieu Muslim Reminder (nécessaire s'il y en a plusieurs)."
+        },
+        "entity_id": {
+          "name": "Enceintes",
+          "description": "Lecteurs multimédias où jouer (par défaut : ceux des options)."
+        },
+        "sound": {
+          "name": "Son",
+          "description": "Par défaut : celui qui est choisi."
+        },
+        "volume": {
+          "name": "Volume",
+          "description": "Volume en pourcentage (par défaut : celui réglé ; 0 laisse le volume tel quel)."
+        }
+      }
+    },
+    "play_adhan": {
+      "name": "Jouer l'adhan",
+      "description": "Joue l'adhan tout de suite, quels que soient les interrupteurs et les conditions.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Lieu",
+          "description": "Le lieu Muslim Reminder (nécessaire s'il y en a plusieurs)."
+        },
+        "entity_id": {
+          "name": "Enceintes",
+          "description": "Lecteurs multimédias où jouer (par défaut : ceux des options)."
+        },
+        "sound": {
+          "name": "Son",
+          "description": "Par défaut : celui qui est choisi."
+        },
+        "full": {
+          "name": "Adhan complet",
+          "description": "Désactivé : la version courte (30 s)."
+        },
+        "volume": {
+          "name": "Volume",
+          "description": "Volume en pourcentage (par défaut : celui réglé ; 0 laisse le volume tel quel)."
+        }
+      }
+    },
+    "get_prayer_times": {
+      "name": "Obtenir les horaires de prière",
+      "description": "Renvoie les horaires de prière d'un jour.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Lieu",
+          "description": "Le lieu Muslim Reminder (nécessaire s'il y en a plusieurs)."
+        },
+        "date": {
+          "name": "Date",
+          "description": "Par défaut : aujourd'hui."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "no_entry": {
+      "message": "Aucun lieu Muslim Reminder n'est chargé."
+    },
+    "several_entries": {
+      "message": "Plusieurs lieux sont configurés : choisissez-en un avec config_entry_id."
+    }
+  }
+}

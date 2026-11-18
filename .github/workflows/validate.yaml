@@ -1,0 +1,52 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hassfest:
+    name: Hassfest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: home-assistant/actions/hassfest@master
+
+  hacs:
+    name: HACS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hacs/action@main
+        with:
+          category: integration
+
+  tests:
+    name: Tests (Home Assistant ${{ matrix.homeassistant }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # The oldest version of hacs.json, and the latest one.
+          - homeassistant: "2025.10"
+            python: "3.13"
+            requirements: pytest-homeassistant-custom-component==0.13.285 "pycares<5"
+          - homeassistant: latest
+            python: "3.14"
+            requirements: -r requirements_test.txt
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: ${{ matrix.python }}
+      - run: uv venv && uv pip install ${{ matrix.requirements }} ruff==0.17.5
+      - run: uv run --no-sync ruff format --check .
+      - run: uv run --no-sync ruff check .
+      - run: uv run --no-sync pytest -q

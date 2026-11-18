@@ -1,0 +1,43 @@
+blueprint:
+  name: Muslim Reminder · Salawat reminders when someone is home
+  description: >-
+    Switches the salawat reminders on when someone comes home and off when
+    the house is empty. The presence can be zone.home (number of people at
+    home), a person, a group or any binary sensor.
+  domain: automation
+  source_url: https://github.com/muslimreminder/home-assistant/blob/main/blueprints/automation/muslim_reminder/salawat_presence.yaml
+  input:
+    presence:
+      name: Presence
+      default: zone.home
+      selector:
+        entity:
+          filter:
+            - domain: [zone, person, group, binary_sensor, input_boolean, device_tracker]
+    reminders:
+      name: Salawat reminders switch
+      selector:
+        entity:
+          filter:
+            - integration: muslim_reminder
+              domain: switch
+
+mode: restart
+
+triggers:
+  - trigger: state
+    entity_id: !input presence
+  - trigger: homeassistant
+    event: start
+
+variables:
+  presence: !input presence
+  reminders: !input reminders
+  state: "{{ states(presence) }}"
+  someone_home: >-
+    {{ state in ['on', 'home'] or (state | int(0)) > 0 }}
+
+actions:
+  - action: "{{ 'switch.turn_on' if someone_home else 'switch.turn_off' }}"
+    target:
+      entity_id: "{{ reminders }}"

@@ -1,0 +1,39 @@
+blueprint:
+  name: Muslim Reminder · Before (or after) a prayer
+  description: >-
+    Do something some minutes before or after a prayer time: warm the
+    bathroom for the ablutions before Fajr, announce "Isha in 10 minutes",
+    switch the TV off after Maghrib…
+  domain: automation
+  source_url: https://github.com/muslimreminder/home-assistant/blob/main/blueprints/automation/muslim_reminder/before_prayer.yaml
+  input:
+    prayer_time:
+      name: Prayer time
+      description: A time sensor of Muslim Reminder (Fajr, Dhuhr…).
+      selector:
+        entity:
+          filter:
+            - integration: muslim_reminder
+              domain: sensor
+              device_class: timestamp
+    offset:
+      name: Offset
+      description: Negative = before the prayer, positive = after.
+      default: { hours: 0, minutes: -10, seconds: 0 }
+      selector:
+        duration:
+          allow_negative: true
+    actions:
+      name: Actions
+      selector:
+        action: {}
+
+mode: single
+
+triggers:
+  - trigger: time
+    at:
+      entity_id: !input prayer_time
+      offset: !input offset
+
+actions: !input actions
