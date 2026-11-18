@@ -7,16 +7,15 @@ from pathlib import Path
 import shutil
 
 from freezegun.api import FrozenDateTimeFactory
+from homeassistant.core import HomeAssistant
+from homeassistant.setup import async_setup_component
+from homeassistant.util import dt as dt_util
 import pytest
 from pytest_homeassistant_custom_component.common import (
     MockConfigEntry,
     async_fire_time_changed,
     async_mock_service,
 )
-
-from homeassistant.core import HomeAssistant
-from homeassistant.setup import async_setup_component
-from homeassistant.util import dt as dt_util
 
 BLUEPRINTS = Path(__file__).parents[1] / "blueprints" / "automation" / "muslim_reminder"
 

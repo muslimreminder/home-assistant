@@ -46,7 +46,7 @@ jobs:
       - uses: astral-sh/setup-uv@v7
         with:
           python-version: ${{ matrix.python }}
-      - run: uv venv && uv pip install ${{ matrix.requirements }} ruff
+      - run: uv venv && uv pip install ${{ matrix.requirements }} ruff==0.17.5
       - run: uv run --no-sync ruff format --check .
       - run: uv run --no-sync ruff check .
       - run: uv run --no-sync pytest -q
